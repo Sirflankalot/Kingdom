@@ -5,109 +5,87 @@
 #include "../../Tiles/Other/tilemap.h"
 #include "sf_entity.h"
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "../../game.h"
 
-enum Mob_State
-{
-        MOB_STATE_AIR
-    ,   MOB_STATE_GROUND
-    ,   MOB_STATE_WATER
-};
+enum Mob_State { MOB_STATE_AIR, MOB_STATE_GROUND, MOB_STATE_WATER };
 
-class Mob : public Sf_Entity
-{
+class Mob : public Sf_Entity {
     using Comp = std::unique_ptr<Component::Component_Base>;
 
+  public:
+    const sf::Vector2i& getTileMapPosition();
 
+    void update(const float dt);
 
-    public:
-        const sf::Vector2i&
-        getTileMapPosition  ();
+    const bool isAlive() {
+        return m_isLiving;
+    }
 
-        void
-        update              ( const float dt );
+    void setAlive(const bool alive) {
+        m_isLiving = alive;
+    }
 
-        const bool
-        isAlive             ( )                         { return m_isLiving; }
+    void setMobState(const Mob_State state) {
+        m_mobState = state;
+    }
 
-        void
-        setAlive            ( const bool alive )        { m_isLiving = alive; }
+    const Mob_State getMobState() {
+        return m_mobState;
+    }
 
-        void
-        setMobState         ( const Mob_State state )   { m_mobState = state; }
+    void velocityForwards(const float dt);
 
-        const Mob_State
-        getMobState         ( )                          { return m_mobState; }
+    void velocityBackwards(const float dt);
 
-        void
-        velocityForwards    ( const float dt );
+    void velocityLeft(const float dt);
 
-        void
-        velocityBackwards   ( const float dt );
+    void velocityRight(const float dt);
 
-        void
-        velocityLeft        ( const float dt );
+    void setTarget(Mob* mob);
 
-        void
-        velocityRight       ( const float dt );
+    const Mob* getTarget() const;
 
-        void
-        setTarget                   ( Mob* mob );
+    const sf::Vector2i getTargetTilePosition();
 
-        const Mob*
-        getTarget                   () const;
+    const bool hasTarget() const;
 
-        const sf::Vector2i
-        getTargetTilePosition       ();
+  protected:
+    Mob(Game* game, const sf::Texture& texture, Tile_Map* tiles);
 
-        const bool
-        hasTarget                   () const;
+    virtual void uniqueLogic(const float dt) = 0;
 
+    void addComponent(Comp c);
 
-    protected:
-        Mob ( Game* game, const sf::Texture& texture, Tile_Map* tiles );
+    void updateTileMapPos();
 
-        virtual void
-        uniqueLogic         ( const float dt ) = 0;
+  protected:
+    Game* m_game;
+    Tile_Map* m_tileMap;
+    bool m_isMoving{false};
 
-        void
-        addComponent        ( Comp c );
+    Mob* m_target{nullptr};
 
-        void
-        updateTileMapPos    ();
+    void setPosAtSolidTile();
 
+  private:
+    void componentLogic(const float dt);
 
-    protected:
-        Game*           m_game;
-        Tile_Map*       m_tileMap;
-        bool            m_isMoving  { false };
+    void checkVel();
 
-        Mob*            m_target            { nullptr };
+  private:
+    std::vector<Comp> m_components;
 
-        void
-        setPosAtSolidTile   ();
+    sf::Vector2i m_tileMapPos;
 
-    private:
-        void
-        componentLogic      ( const float dt );
+    bool m_isLiving;
 
-        void
-        checkVel            ( );
+    Mob_State m_mobState;
 
-    private:
-        std::vector< Comp > m_components;
-
-        sf::Vector2i    m_tileMapPos;
-
-        bool            m_isLiving;
-
-        Mob_State       m_mobState;
-
-    protected: //temp
-        /*const*/ float     m_walkSpeed { 25 };
+  protected: // temp
+    /*const*/ float m_walkSpeed{25};
 };
 
 #endif // MOB_H

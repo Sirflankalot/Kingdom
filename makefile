@@ -1,6 +1,7 @@
 WARNINGS = -Wall
 STD = -std=c++14
-OPTIMIZE = -O3
+OPTIMIZE = -Ofast
+DEBUG = 
 INCLUDE = -ISource -ISource/Components -ISource/Entities -ISource/Light -ISource/Managers -ISource/States -ISource/Tiles -ISource/Util
 INCLUDE += -ISource/Tiles/Util
 LINKING = -lsfml-graphics -lsfml-window -lsfml-system -lGL
@@ -25,19 +26,23 @@ CPP_FILES +=$(wildcard Source/Util/*.cpp)
 
 OBJ_FILES = $(addprefix bin/,$(notdir $(CPP_FILES:.cpp=.o)))
 
-CXX=g++-5
+CXX=g++
 
 all: mkbindir Kingdom
 
-debug: OPTIMIZE = -Og -g 
+debug: OPTIMIZE = -Og
+debug: DEBUG = -g
 debug: mkbindir Kingdom
+
+profile: DEBUG = -pg
+profile: mkbindir Kingdom
 
 mkbindir:
 	@mkdir -p bin/
 
 Kingdom: $(OBJ_FILES)
 	@echo Linking $@
-	@$(CXX) $^ $(STD) -o $(NAME) $(LINKING) 
+	@$(CXX) $^ $(STD) -o $(NAME) $(DEBUG) $(LINKING) 
 
 clean:
 	rm -rf bin/
@@ -45,60 +50,60 @@ clean:
 
 bin/%.o: Source/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Components/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Components/AI/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Components/Bases/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Entities/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Entities/Bases/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Entities/Enemies/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Light/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Managers/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/States/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Tiles/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Tiles/Base/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Tiles/Other/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Tiles/Util/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
 
 bin/%.o: Source/Util/%.cpp
 	@echo $(CXX) $<
-	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(OPTIMIZE) $(DEFINES) -c -o $@ $<
+	@$(CXX) $(STD) $(WARNINGS) $(INCLUDE) $(DEBUG) $(OPTIMIZE) $(DEFINES) -c -o $@ $<

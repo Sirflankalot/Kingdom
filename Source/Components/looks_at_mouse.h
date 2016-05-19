@@ -6,24 +6,21 @@
 #include "Bases/mob.h"
 
 /*
-    Makes a sprite always look at the mouse.
+	Makes a sprite always look at the mouse.
 */
 
-namespace Component
-{
+namespace Component {
 
-class Look_At_Mouse : public Component_Base
-{
-    public:
-        Look_At_Mouse( Mob* mob, sf::RenderWindow* window );
+	class Look_At_Mouse : public Component_Base {
+	  public:
+		Look_At_Mouse(Mob* mob, sf::RenderWindow* window);
 
-        void
-        logic ( const float dt ) override;
+		void logic(const float dt) override;
 
-    private:
-        sf::RenderWindow*   m_window;   //Window relative to the mouse position ( main window)
-};
+	  private:
+		sf::RenderWindow* m_window; // Window relative to the mouse position ( main window)
+	};
 
-} //Namespace Component
+} // Namespace Component
 
 #endif // LOOKATMOUSE_H

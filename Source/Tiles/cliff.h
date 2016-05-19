@@ -3,20 +3,16 @@
 
 #include "Base/tile.h"
 
-namespace Tiles
-{
+namespace Tiles {
 
-class Cliff : public Tile
-{
-    public:
-        Cliff( const Game& game, const sf::Vector2i& pos,
-               const Ecosystem ecosystem, const sf::Color& light = { 0, 0, 0 } );
+	class Cliff : public Tile {
+	  public:
+		Cliff(const Game& game, const sf::Vector2i& pos, const Ecosystem ecosystem, const sf::Color& light = {0, 0, 0});
 
-    protected:
+	  protected:
+	  private:
+	};
 
-    private:
-};
-
-} //namespace Tiles
+} // namespace Tiles
 
 #endif // CLIFF_H

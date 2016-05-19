@@ -1,30 +1,27 @@
 #ifndef STEPS_ON_TILES_H
 #define STEPS_ON_TILES_H
 
-#include "Bases/mob.h"
 #include "Bases/component.h"
+#include "Bases/mob.h"
 #include "Other/tilemap.h"
 
 /*
-    Every time the mob steps on a new tile, it calls the "steppedOn()" method for that tile
+	Every time the mob steps on a new tile, it calls the "steppedOn()" method for that tile
 */
 
-namespace Component
-{
+namespace Component {
 
-class Steps_On_Tiles : public Component_Base
-{
-    public:
-        Steps_On_Tiles( Mob* mob, Tile_Map* tile_map );
+	class Steps_On_Tiles : public Component_Base {
+	  public:
+		Steps_On_Tiles(Mob* mob, Tile_Map* tile_map);
 
-        void
-        logic ( const float dt ) override;
+		void logic(const float dt) override;
 
-    private:
-        Tile_Map*       m_tileMap;
+	  private:
+		Tile_Map* m_tileMap;
 
-        sf::Vector2i    m_mobsCurrTilePos;
-};
+		sf::Vector2i m_mobsCurrTilePos;
+	};
 
 } // Namespace component
 

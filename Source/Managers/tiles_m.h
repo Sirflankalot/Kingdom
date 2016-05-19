@@ -3,29 +3,21 @@
 
 #include <map>
 
-#include "../Tiles/Util/tile_loader.h"
 #include "../Tiles/Util/tile_info.h"
+#include "../Tiles/Util/tile_loader.h"
 
-enum Tile_Type
-{
-        TILE_GRASS
-    ,   TILE_WATER
-    ,   TILE_ICE
-    ,   TILE_CLIFF
-};
+enum Tile_Type { TILE_GRASS, TILE_WATER, TILE_ICE, TILE_CLIFF };
 
-class Tiles_M
-{
-    public:
-        Tiles_M();
+class Tiles_M {
+  public:
+    Tiles_M();
 
-        const Tile_Info&
-        getTileInfo ( const Tile_Type tileType ) const;
+    const Tile_Info& getTileInfo(const Tile_Type tileType) const;
 
-    private:
-        Tile_Loader    m_tileLoader;
+  private:
+    Tile_Loader m_tileLoader;
 
-        std::map<Tile_Type, Tile_Info>    m_tiles;
+    std::map<Tile_Type, Tile_Info> m_tiles;
 };
 
 #endif // TILES_M_H

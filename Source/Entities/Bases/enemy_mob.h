@@ -2,27 +2,21 @@
 #define ENEMY_MOB_H
 
 /*
-    The entities that attack the player, thus have more things.
+	The entities that attack the player, thus have more things.
 */
-#include "../../Entities/player.h"
 #include "../../Entities/Bases/enemy_mob.h"
+#include "../../Entities/player.h"
 
+class Enemy_Mob : public Mob {
+  public:
+	virtual void uniqueLogic(const float dt) = 0;
 
-class Enemy_Mob  :  public Mob
-{
-public:
+  protected:
+	Enemy_Mob(Game* game, const sf::Texture& texture, Tile_Map* tiles, Player* player);
 
-        virtual void
-        uniqueLogic( const float dt ) = 0;
+	Player* player;
 
-    protected:
-        Enemy_Mob(  Game* game, const sf::Texture& texture, Tile_Map* tiles, Player* player  );
-
-        Player* player;
-
-        virtual void
-        attack() = 0;
-
+	virtual void attack() = 0;
 };
 
 #endif // ENEMY_MOB_H

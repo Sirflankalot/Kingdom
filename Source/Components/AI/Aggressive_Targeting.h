@@ -6,46 +6,36 @@
     Becomes non-aggressive after "m_maxDist" tiles away.
 */
 
-#include "Bases/enemy_mob.h"
 #include "Bases/component.h"
+#include "Bases/enemy_mob.h"
 #include "player.h"
 
-#include <vector>
 #include <memory>
+#include <vector>
 
+namespace Component {
 
-namespace Component
-{
+    class Aggressive_Targeting : public Component_Base {
+        typedef std::vector<std::unique_ptr<Mob>> MobPtrVec;
 
-class Aggressive_Targeting : public Component_Base
-{
-    typedef std::vector<std::unique_ptr<Mob>> MobPtrVec;
+      public:
+        Aggressive_Targeting(Mob* mob, Player* player, MobPtrVec* mobs, unsigned maxDist);
 
-    public:
-        Aggressive_Targeting ( Mob* mob, Player* player,
-                              MobPtrVec* mobs, unsigned maxDist );
+        void logic(const float dt) override;
 
-        void
-        logic   ( const float dt ) override;
+      private:
+        void checkDistToPlayer();
 
-    private:
-        void
-        checkDistToPlayer   ();
+        void checkTarget();
 
-        void
-        checkTarget         ();
+        const unsigned getDistance(const sf::Vector2i& otherPos) const;
 
-        const unsigned
-        getDistance         ( const sf::Vector2i& otherPos ) const;
+      private:
+        MobPtrVec* m_mobVec; // The list of potential mobs to be attacking
+        unsigned m_maxDist;  // The max distance before it becomes non aggressive
 
-
-    private:
-        MobPtrVec*  m_mobVec;           //The list of potential mobs to be attacking
-        unsigned    m_maxDist;          //The max distance before it becomes non aggressive
-
-        Player*     m_player;
-};
-
+        Player* m_player;
+    };
 }
 
 #endif // Aggressive_Targeting_H

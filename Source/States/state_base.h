@@ -7,37 +7,29 @@
 
 class Game;
 
-namespace State
-{
+namespace State {
 
-class State_Base
-{
-    public:
-        State_Base  ( Game* game);
+    class State_Base {
+      public:
+        State_Base(Game* game);
 
-        virtual
-        ~State_Base ();
+        virtual ~State_Base();
 
-        virtual void
-        input       ( const double dt ) = 0;
+        virtual void input(const double dt) = 0;
 
-        virtual void
-        update      ( const double dt ) = 0;
+        virtual void update(const double dt) = 0;
 
-        virtual void
-        glDraw        ( const double dt ) = 0;
+        virtual void glDraw(const double dt) = 0;
 
-        virtual void
-        sfDraw        ( const double dt ) = 0;
+        virtual void sfDraw(const double dt) = 0;
 
-    protected:
-        Game&
-        getGame() const;
+      protected:
+        Game& getGame() const;
 
-    private:
+      private:
         Game* mGame;
-};
+    };
 
-} //Namespace state
+} // Namespace state
 
 #endif // STATE_BASE_H

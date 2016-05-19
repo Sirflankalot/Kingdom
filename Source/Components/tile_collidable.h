@@ -2,53 +2,42 @@
 #define TILE_COLLIDABLE_H
 
 #include "Bases/component.h"
-#include "Other/tilemap.h"
 #include "Bases/mob.h"
+#include "Other/tilemap.h"
 
 /*
     Does not allow the mob to walk into tiles marked as "not walkable"
 */
 
-namespace Component
-{
+namespace Component {
 
-class Tile_Collidable : public Component_Base
-{
-    public:
-        Tile_Collidable ( Mob* mob, Tile_Map* tiles );
+    class Tile_Collidable : public Component_Base {
+      public:
+        Tile_Collidable(Mob* mob, Tile_Map* tiles);
 
-        void
-        logic ( const float dt ) override;
+        void logic(const float dt) override;
 
-    private:
-        void
-        tileCollisionsXGround ();
+      private:
+        void tileCollisionsXGround();
 
-        void
-        tileCollisionsYGround ();
+        void tileCollisionsYGround();
 
-        void
-        tileCollisionsXWater ();
+        void tileCollisionsXWater();
 
-        void
-        tileCollisionsYWater ();
+        void tileCollisionsYWater();
 
-        void
-        invertVelocity  ();
+        void invertVelocity();
 
-        void
-        updatePrevTile  ();
+        void updatePrevTile();
 
-        Tile_Map*       m_tileMap;
+        Tile_Map* m_tileMap;
 
-        bool            m_velInverted       { false };
-        bool            m_isInBadTile       { false };
+        bool m_velInverted{false};
+        bool m_isInBadTile{false};
 
-        sf::Vector2f    m_prevTileMapPos;
+        sf::Vector2f m_prevTileMapPos;
+    };
 
-
-};
-
-} //Namespace Component
+} // Namespace Component
 
 #endif // TILE_COLLIDABLE_H

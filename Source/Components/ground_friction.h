@@ -1,29 +1,25 @@
 #ifndef GROUND_FRICTION_H
 #define GROUND_FRICTION_H
 
-#include "Other/tilemap.h"
-#include "Bases/mob.h"
 #include "Bases/component.h"
+#include "Bases/mob.h"
+#include "Other/tilemap.h"
 
 /*
-    Applies friction to mobs based on tiles friction values.
+	Applies friction to mobs based on tiles friction values.
 */
 
-namespace Component
-{
+namespace Component {
 
-class Ground_Friction : public Component_Base
-{
-    public:
-        Ground_Friction( Mob* mob, Tile_Map* map);
+	class Ground_Friction : public Component_Base {
+	  public:
+		Ground_Friction(Mob* mob, Tile_Map* map);
 
-        void
-        logic   ( const float dt ) override;
+		void logic(const float dt) override;
 
-    private:
-        Tile_Map*   m_tileMap;
-};
-
+	  private:
+		Tile_Map* m_tileMap;
+	};
 }
 
 #endif // GROUND_FRICTION_H

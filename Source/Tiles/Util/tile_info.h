@@ -3,16 +3,14 @@
 
 #include "SFML/Graphics/Color.hpp"
 
-struct Tile_Info
-{
-    bool        isWalkable;
-    bool        isSwimmable;
+struct Tile_Info {
+	bool isWalkable;
+	bool isSwimmable;
 
-    double      friction;
-    double      viscosity;
+	double friction;
+	double viscosity;
 
-    sf::Color   colour;
+	sf::Color colour;
 };
-
 
 #endif // TILE_INFO_H_INCLUDED

@@ -3,22 +3,16 @@
 #include "../game.h"
 
 /**
-    The base class for all the games states, such as menus, roaming, battles etc
+	The base class for all the games states, such as menus, roaming, battles etc
 */
 
-namespace State
-{
+namespace State {
 
-State_Base :: State_Base ( Game* game)
-:   mGame   ( game )
-{ }
+	State_Base::State_Base(Game* game) : mGame(game) {}
 
-Game&
-State_Base :: getGame() const
-{
-    return *mGame;
-}
+	Game& State_Base::getGame() const {
+		return *mGame;
+	}
 
-State_Base :: ~State_Base () { }
-
+	State_Base::~State_Base() {}
 }
